@@ -1,6 +1,6 @@
 ---
 - name: Run container
-  hosts: all
+  hosts: localhost
   gather_facts: no
   tasks:
     - name: restart container
