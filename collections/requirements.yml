@@ -1,10 +1,6 @@
 ---
 collections:
   - name: community.kubernetes
-    version: latest
   - name: chocolatey.chocolatey
-    version: latest
   - name: community.general
-    version: latest
   - name: community.docker
-    version: latest
