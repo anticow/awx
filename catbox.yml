@@ -1,7 +1,7 @@
 ---
 - name: Run container
   gather_facts: no
-  hosts: localhost
+  hosts: catbox
   become: true
   become_method: sudo
   tasks:
