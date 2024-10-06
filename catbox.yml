@@ -1,7 +1,10 @@
 ---
 - name: Run container
-  hosts: localhost
   gather_facts: no
+  hosts: all
+  remote_user: grife
+  become: true
+  become_method: sudo
   tasks:
     - name: restart container
       community.docker.docker_compose_v2:
