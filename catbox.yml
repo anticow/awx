@@ -1,7 +1,6 @@
 ---
 - name: Run container
-  gather_facts: no
-  hosts: catbox
+  hosts: catbox.cowgomu.net
   become: true
   become_method: sudo
   tasks:
