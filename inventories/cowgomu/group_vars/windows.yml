@@ -1,0 +1,6 @@
+---
+# Put variables here that apply to all windows servers
+
+# Windows needs to use winrm connection method instead of default ssh
+ansible_connection: winrm
+ansible_winrm_transport: basic
