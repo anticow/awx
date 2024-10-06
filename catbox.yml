@@ -1,6 +1,6 @@
 ---
 - name: Run container
-  hosts: localhost
+  hosts: catbox.cowgomu.net
   gather_facts: no
   tasks:
     - name: restart container
