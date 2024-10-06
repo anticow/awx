@@ -1,0 +1,56 @@
+---
+- name : update ansible host
+  hosts: ansible
+
+- name: Update web servers
+  hosts: webservers
+  remote_user: grife
+
+  tasks:
+  - name: Ensure apache is at the latest version
+    ansible.builtin.apt:
+      name: httpd
+      state: latest
+  - name: Write the apache config file
+    ansible.builtin.template:
+      src: /srv/httpd.j2
+      dest: /etc/httpd.conf
+
+- name: Update db servers
+  hosts: databases
+  remote_user: grife
+
+  tasks:
+  - name: Ensure postgresql is at the latest version
+    ansible.builtin.apt:
+      name: postgresql
+      state: latest
+  - name: Ensure that postgresql is started
+    ansible.builtin.service:
+      name: postgresql
+      state: started
+
+- name: validate installed packages
+  hosts: all
+  remote_user: grife
+  become: true
+  become_method: sudo
+  tasks:
+  - name: Install ntpdate
+    ansible.builtin.package:
+      name: ntpdate
+      state: present
+  - name: Update all packages to their latest version
+    apt:
+      name: "*"
+      state: latest
+  - name: Remove useless packages from the cache
+    apt:
+      autoclean: yes
+  - name: Remove dependencies that are no longer required
+    apt:
+      autoremove: yes
+  - name: Install Python3
+    apt:
+      name: python3
+      state: latest
