@@ -1,8 +1,7 @@
 ---
 - name: Run container
   gather_facts: no
-  hosts: all
-  remote_user: grife
+  hosts: localhost
   become: true
   become_method: sudo
   tasks:
