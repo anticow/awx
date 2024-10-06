@@ -1,6 +1,6 @@
 ---
 - name: Run container
-  hosts: catbox
+  hosts: localhost
   gather_facts: no
   tasks:
     - name: restart container
