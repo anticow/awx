@@ -1,0 +1,23 @@
+- name: Install AWX Operator
+  kubernetes.core.k8s:
+    definition:
+      apiVersion: v1
+      kind: Namespace
+      metadata:
+        name: awx
+
+- name: Apply AWX Operator manifest
+  ansible.builtin.shell:
+    cmd: kubectl apply -f https://raw.githubusercontent.com/ansible/awx-operator/devel/deploy/awx-operator.yaml -n awx
+
+- name: Create AWX instance
+  kubernetes.core.k8s:
+    definition:
+      apiVersion: awx.ansible.com/v1beta1
+      kind: AWX
+      metadata:
+        name: awx
+        namespace: awx
+      spec:
+        service_type: NodePort
+  delegate_to: "k3s-control-1"

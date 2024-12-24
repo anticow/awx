@@ -1,0 +1,33 @@
+---
+# Proxmox configuration
+proxmox_api_user: "root@pam"
+proxmox_api_password: "your_secure_password"
+proxmox_api_host: "proxmox.example.com"
+proxmox_node: "pve"
+
+# K3s cluster configuration
+k3s_control_nodes: 3
+k3s_worker_nodes: 2
+
+# Domain for Rancher
+domain: "example.com"
+
+# LXC container specifications
+control_node_specs:
+  cores: 4
+  memory: 4096
+  disk: "8"
+
+worker_node_specs:
+  cores: 4
+  memory: 8192
+  disk: "16"
+
+# K3s version
+k3s_version: "v1.21.5+k3s1"
+
+# AWX configuration
+awx_admin_password: "your_secure_awx_password"
+
+# Rancher configuration
+rancher_version: "v2.6.3"

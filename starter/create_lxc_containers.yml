@@ -1,0 +1,33 @@
+- name: Create K3s control node LXC containers
+  community.general.proxmox_kvm:
+    api_user: "{{ proxmox_api_user }}"
+    api_password: "{{ proxmox_api_password }}"
+    api_host: "{{ proxmox_api_host }}"
+    node: "{{ proxmox_node }}"
+    name: "k3s-control-{{ item }}"
+    ostemplate: "local:vztmpl/ubuntu-20.04-standard_20.04-1_amd64.tar.gz"
+    cores: 2
+    memory: 2048
+    disk: "8"
+    storage: "local-lvm"
+    unprivileged: false
+    onboot: yes
+    state: present
+  loop: "{{ range(1, k3s_control_nodes + 1) | list }}"
+
+- name: Create K3s worker node LXC containers
+  community.general.proxmox_kvm:
+    api_user: "{{ proxmox_api_user }}"
+    api_password: "{{ proxmox_api_password }}"
+    api_host: "{{ proxmox_api_host }}"
+    node: "{{ proxmox_node }}"
+    name: "k3s-worker-{{ item }}"
+    ostemplate: "local:vztmpl/ubuntu-20.04-standard_20.04-1_amd64.tar.gz"
+    cores: 2
+    memory: 4096
+    disk: "16"
+    storage: "local-lvm"
+    unprivileged: false
+    onboot: yes
+    state: present
+  loop: "{{ range(1, k3s_worker_nodes + 1) | list }}"

@@ -1,0 +1,17 @@
+---
+- name: Deploy K3s cluster with AWX and Rancher on Proxmox
+  hosts: localhost
+  gather_facts: false
+  
+  tasks:
+    - name: Create Proxmox LXC containers for K3s nodes
+      include_tasks: starter\create_lxc_containers.yml
+
+    - name: Initialize K3s cluster
+      include_tasks: starter\init_k3s_cluster.yml
+
+    - name: Deploy AWX
+      include_tasks: starter\deploy_awx.yml
+
+    - name: Deploy Rancher
+      include_tasks: starter\deploy_rancher.yml
